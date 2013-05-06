@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<title>Real-time Twitter Feed</title>
+		<script src="/socket.io/socket.io.js"></script>
+	</head>
+	<body>
+		<h1>Real-time bieber tweets</h1>
+
+		<ul id="tweets">
+				{{INTIAL_TWEETS}}
+		</ul>
+		
+
+		<script>
+
+		  var socket = io.connect('http://localhost');
+		var ul = document.getElementById("tweets");
+		  socket.on('tweet', function (tweet) {
+		    console.log(tweet);
+		    var li = document.createElement("li");
+			li.innerHTML = "<strong>" + tweet.user.screen_name + ": </strong>" + tweet.text;
+			ul.insertBefore(li, ul.getElementsByTagName("li")[0]);
+		  });
+		</script>
+
+
+
+
+	</body>
+</html>
